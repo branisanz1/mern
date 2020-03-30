@@ -13,6 +13,8 @@ import indexRouter from './routes/index';
 import playerRouter from './routes/player';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import userRouter from './routes/user';
+import messageRouter from './routes/message';
 const app = express();
 
 // secure the server by setting various HTTP headers
@@ -66,6 +68,8 @@ mongoose
 // routes
 app.use('/', indexRouter);
 app.use('/player', playerRouter);
+app.use('/message', messageRouter);
+app.use('/user', userRouter);
 
 // setup ip address and port number
 app.set('port', process.env.PORT || 3000);
