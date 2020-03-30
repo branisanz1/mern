@@ -23,3 +23,14 @@ export const getAll = (req, res) => {
     res.send(players);
   });
 };
+
+export const getById = (req, res) => {
+  console.log(req.params.id);
+  Player.find({ _id: req.params.id }, (err, player) => {
+    if (err) {
+      res.send('an error occured while trying to get player');
+    }
+
+    res.send(player);
+  });
+};
