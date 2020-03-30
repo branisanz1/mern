@@ -35,12 +35,21 @@ export const getById = (req, res) => {
 };
 
 export const update = (req, res) => {
-  console.log(req.body);
   Player.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true }, (err, playerUpdated) => {
     if (err) {
       res.send('an error occured while trying to get player');
     }
 
     res.json(playerUpdated);
+  });
+};
+
+export const deletePlayer = (req, res) => {
+  Player.remove({ _id: req.params.id }, err => {
+    if (err) {
+      res.send('an error occured while trying to get player');
+    }
+
+    res.send('Le joueur a ete supprimé !');
   });
 };
