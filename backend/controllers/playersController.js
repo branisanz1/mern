@@ -25,12 +25,22 @@ export const getAll = (req, res) => {
 };
 
 export const getById = (req, res) => {
-  console.log(req.params.id);
   Player.find({ _id: req.params.id }, (err, player) => {
     if (err) {
       res.send('an error occured while trying to get player');
     }
 
-    res.send(player);
+    res.json(player);
+  });
+};
+
+export const update = (req, res) => {
+  console.log(req.body);
+  Player.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true }, (err, playerUpdated) => {
+    if (err) {
+      res.send('an error occured while trying to get player');
+    }
+
+    res.json(playerUpdated);
   });
 };
