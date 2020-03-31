@@ -26,3 +26,13 @@ export const deleteFish = async (req, res) => {
     res.send('Le poisson a ete supprimé !');
   });
 };
+
+export const update = (req, res) => {
+  Fish.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true }, (err, fishUpdated) => {
+    if (err) {
+      res.send('an error occured while trying to update fish');
+    }
+
+    res.json(fishUpdated);
+  });
+};
