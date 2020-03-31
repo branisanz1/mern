@@ -24,14 +24,13 @@ export const login = async (req, res) => {
       };
 
       let token = jwt.encode(payload, process.env.TOKEN_SECRET);
-      console.log(token);
-      res.json({
+      return res.json({
         firstName: person.firstName,
         lastName: person.lastName,
         token: `Bearer ${token}`,
         expiration: moment().add(1, 'hour').format('YYYY-MM-DD HH:mm:ss')
       });
     }
-    res.send('Mot de passe incorect');
+    return res.send('Mot de passe incorect');
   });
 };
