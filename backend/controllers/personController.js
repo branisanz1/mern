@@ -4,8 +4,12 @@ import Person from '../models/personModel';
 import moment from 'moment';
 export const signUp = async (req, res) => {
   let person = new Person(req.body);
-  let createPerson = await person.save();
-  res.json(createPerson);
+  try {
+    let createPerson = await person.save();
+    res.json(createPerson);
+  } catch (error) {
+    return res.send('An error as encored');
+  }
 };
 
 export const login = async (req, res) => {
@@ -20,7 +24,9 @@ export const login = async (req, res) => {
       const payload = {
         exp: moment().add(1, 'hour').unix(),
         iat: moment().unix(),
-        iss: person.id
+        iss: person.id,
+        firstName: person.firstName,
+        email: person.email
       };
 
       let token = jwt.encode(payload, process.env.TOKEN_SECRET);
