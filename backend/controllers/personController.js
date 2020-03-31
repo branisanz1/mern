@@ -1,8 +1,7 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jwt-simple';
-import moment from 'moment';
 import Person from '../models/personModel';
-
+import moment from 'moment';
 export const signUp = async (req, res) => {
   let person = new Person(req.body);
   let createPerson = await person.save();
