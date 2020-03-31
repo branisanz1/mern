@@ -17,6 +17,7 @@ import userRouter from './routes/user';
 import messageRouter from './routes/message';
 const app = express();
 
+dotenv.config();
 // secure the server by setting various HTTP headers
 app.use(helmet());
 
@@ -79,7 +80,7 @@ app.set('ipaddr', '0.0.0.0');
 app.listen(app.get('port'), app.get('ipaddr'), function () {
   console.log(
     emoji.get('heart'),
-    'The server is running @ ' + 'http://localhost/' + app.get('port'),
+    'The server is running @ ' + 'http://localhost:' + app.get('port'),
     emoji.get('heart')
   );
 });
