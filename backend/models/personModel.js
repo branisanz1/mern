@@ -1,6 +1,6 @@
-import { Schema } from 'mongoose';
+import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
-const personSchema = new Schema({
+const personSchema = new mongoose.Schema({
   firstName: {
     type: String,
     required: true
@@ -31,4 +31,4 @@ personSchema.pre('save', function (next) {
   });
 });
 
-export default personSchema;
+export default mongoose.model('Person', personSchema);

@@ -12,12 +12,11 @@ export const login = async (req, res) => {
   const person = await Person.findOne({ email: req.body.email });
 
   if (!person) {
-    return res.send('not exist');
+    return res.send('La personne existe pas');
   }
   const password = req.body.password;
   bcrypt.compare(password, person.password, function (error, success) {
     if (success) {
-      res.send('good');
       const payload = {
         exp: moment().add(1, 'hour').unix(),
         iat: moment().unix(),
@@ -25,13 +24,14 @@ export const login = async (req, res) => {
       };
 
       let token = jwt.encode(payload, process.env.TOKEN_SECRET);
-      req.json({
+      console.log(token);
+      res.json({
         firstName: person.firstName,
         lastName: person.lastName,
         token: `Bearer ${token}`,
         expiration: moment().add(1, 'hour').format('YYYY-MM-DD HH:mm:ss')
       });
     }
-    res.send('password incorect');
+    res.send('Mot de passe incorect');
   });
 };
