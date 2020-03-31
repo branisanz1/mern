@@ -2,11 +2,11 @@ import jwt from 'jwt-simple';
 import moment from 'moment';
 import Person from '../models/personModel';
 const ensureIsAuthentificated = (req, res, next) => {
-  if (!req.headers.autoriation) {
+  if (!req.headers.authorization) {
     return res.status(401).send('token is missing');
   }
 
-  const token = req.headers.autoriation.split(' ')[1];
+  const token = req.headers.authorization.split(' ')[1];
 
   var payload = null;
   try {
