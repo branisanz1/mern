@@ -15,6 +15,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import userRouter from './routes/user';
 import messageRouter from './routes/message';
+import personRouter from './routes/person';
 const app = express();
 
 dotenv.config();
@@ -71,6 +72,7 @@ app.use('/', indexRouter);
 app.use('/player', playerRouter);
 app.use('/message', messageRouter);
 app.use('/user', userRouter);
+app.use('/person', personRouter);
 
 // setup ip address and port number
 app.set('port', process.env.PORT || 3000);
