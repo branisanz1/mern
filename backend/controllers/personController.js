@@ -8,7 +8,7 @@ export const signUp = async (req, res) => {
     let createPerson = await person.save();
     res.json(createPerson);
   } catch (error) {
-    return res.send('An error as encored');
+    return res.send(error);
   }
 };
 
@@ -16,7 +16,7 @@ export const login = async (req, res) => {
   const person = await Person.findOne({ email: req.body.email });
 
   if (!person) {
-    return res.send('La personne existe pas');
+    return res.status(401).send('La personne existe pas');
   }
   const password = req.body.password;
   bcrypt.compare(password, person.password, function (error, success) {
@@ -37,6 +37,6 @@ export const login = async (req, res) => {
         expiration: moment().add(1, 'hour').format('YYYY-MM-DD HH:mm:ss')
       });
     }
-    return res.send('Mot de passe incorect');
+    return res.status(401).send('Mot de passe incorect');
   });
 };
