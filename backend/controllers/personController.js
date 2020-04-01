@@ -8,7 +8,7 @@ export const signUp = async (req, res) => {
     let createPerson = await person.save();
     res.json(createPerson);
   } catch (error) {
-    return res.send(error);
+    return res.status(401).send('utilisateur deja existant');
   }
 };
 
