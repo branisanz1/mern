@@ -1,21 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import sampleFishes from '../../sample-fishes';
 import Fish from '../Fish/Fish';
 import './Home.scss';
+import axios from 'axios';
 
 const Home = () => {
-  const [fishes, setFishes] = useState({});
-
+  const [fishesAPI, setFishesAPI] = useState({});
   useEffect(() => {
-    setFishes(sampleFishes);
-  }, [fishes]);
-
+    axios
+      .get('http://localhost:3000/fish')
+      .then(response => response.data)
+      .then(data => setFishesAPI(data));
+  }, []);
   return (
     <div className='menu'>
       <h1>Fishes</h1>
       <ul>
-        {Object.keys(fishes).map(key => (
-          <Fish key={key} index={key} details={fishes[key]} />
+        {Object.keys(fishesAPI).map(key => (
+          <Fish key={key} index={key} details={fishesAPI[key]} />
         ))}
       </ul>
     </div>
