@@ -12,14 +12,16 @@ const Home = () => {
       .then(data => setFishesAPI(data));
   }, []);
   return (
-    <div className='menu'>
-      <h1>Fishes</h1>
-      <ul>
-        {Object.keys(fishesAPI).map(key => (
-          <Fish key={key} index={key} details={fishesAPI[key]} />
-        ))}
-      </ul>
-    </div>
+    <>
+      <div className='menu'>
+        <h1>Fishes</h1>
+        <ul>
+          {Object.keys(fishesAPI).map(key => (
+            <Fish key={key} index={key} details={fishesAPI[key]} />
+          ))}
+        </ul>
+      </div>
+    </>
   );
 };
 
